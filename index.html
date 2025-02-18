@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Checker</title>
+</head>
+<body>
+    <h2>On-Page SEO Checker</h2>
+    <form method="POST">
+        <label for="url">Enter Website URL:</label>
+        <input type="text" id="url" name="url" required>
+        <button type="submit">Check SEO</button>
+    </form>
+
+    {% if result %}
+        <h3>SEO Results for {{ url }}</h3>
+        <p><strong>Title:</strong> {{ result["Title"] }}</p>
+        <p><strong>Meta Description:</strong> {{ result["Meta Description"] }}</p>
+        <p><strong>H1 Tag:</strong> {{ result["H1 Tag"] }}</p>
+        
+        <h3>H2 Tags:</h3>
+        <ul>
+            {% for h2 in result["H2 Tags"] %}
+                <li>{{ h2 }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Images and Alt Text:</h3>
+        <ul>
+            {% for image in result["Images"] %}
+                <li>
+                    <img src="{{ image['src'] }}" alt="{{ image['alt'] }}" width="100">
+                    <p>Alt Text: {{ image['alt'] }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <p><strong>Word Count:</strong> {{ result["Word Count"] }}</p>
+    {% endif %}
+</body>
+</html>
